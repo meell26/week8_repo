@@ -1,12 +1,12 @@
-def detector(data):
-   if data['failed_logins'] > 3:
-       return "Anomaly"
-   return "Normal"
+def detector(prediction):
+   return "Anomaly" if prediction == -1 else "Normal"
 
-def analyzer(result):
-   if result == "Anomaly":
-       return "Multiple failed login attempts"
-   return "No threat"
+def analyzer(prediction):
+   if prediction == -1:
+       return "Suspicious behavior detected (multiple failed logins or high activity)"
+   return "No suspicious activity"
 
 def reporter(analysis):
-   return f"ALERT: {analysis}"
+   if "Suspicious" in analysis:
+       return " ALERT: Potential cyber attack detected! Immediate investigation recommended."
+   return "System is operating normally"

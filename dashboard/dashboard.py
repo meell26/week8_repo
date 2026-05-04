@@ -1,8 +1,13 @@
-import pandas as pd
-import matplotlib.pyplot as plt
+import requests
 
-df = pd.read_csv("../features/features.csv")
+url = "http://127.0.0.1:5000/detect"
 
-df.plot(kind='bar')
-plt.title("Threat Features")
-plt.show()
+data = {
+   "failed_logins": 5,
+   "request_count": 20
+}
+
+response = requests.post(url, json=data)
+
+print("Response from API:")
+print(response.json())
